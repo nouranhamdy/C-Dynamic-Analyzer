@@ -5,7 +5,6 @@ public class DynamicAnalyzerHtml extends dynamicAnalyzerBaseListener {
     /* instantiating object from the test class to be able reach the static variable rewriter */
     test t = new test();
     int i = 0;
-    //int[] visited = {0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 
     @Override

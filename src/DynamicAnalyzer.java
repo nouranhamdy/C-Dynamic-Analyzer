@@ -10,7 +10,6 @@ public class DynamicAnalyzer extends dynamicAnalyzerBaseListener {
     File outputFile = new File("src/output.c");
     PrintWriter outFS;
     int i=0;
-    int []visited= {0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
     {
         try {
