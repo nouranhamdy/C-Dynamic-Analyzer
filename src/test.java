@@ -34,7 +34,7 @@ public class test {
     }
 
 
-    static void injectC() throws IOException {
+    static void injectC() throws IOException , InterruptedException {
         /* decorating injections */
         for(int i=0 ; i< tokens.size(); i++){
             rewriter.insertAfter(i, " ");
@@ -53,7 +53,7 @@ public class test {
                 " && gcc C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\src\\output.c -o C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\output"+ //compile the output.c file
                 "&& C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\output > C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\src\\outputOfOutput.txt" + //redirect the output of output.c to txt file
                 " && del C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\output.exe \"");  //delete execution (output.exe) file because it contains the first compilation only i.e. never updates
-
+        Thread.sleep(4000);  //wait 4 seconds till the text is loaded into the text file
         BufferedReader input = new BufferedReader(new FileReader("src\\outputOfOutput.txt"));
         String last = " ", line;
 
