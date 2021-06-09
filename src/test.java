@@ -27,6 +27,8 @@ public class test {
         parseTreeWalker.walk(new DynamicAnalyzer(), tree);
         injectC();
 
+        getBranchCoverageArray();
+
         ParseTreeWalker parseTreeWalker2 = new ParseTreeWalker();
         parseTreeWalker2.walk(new DynamicAnalyzerHtml(), tree);
         injectHtml();
@@ -37,10 +39,10 @@ public class test {
 
     static void injectC() throws IOException, InterruptedException {
         /* decorating injections */
-        for(int i=0 ; i< tokens.size(); i++){
+        for (int i = 0; i < tokens.size(); i++) {
             rewriter.insertAfter(i, " ");
             String tokenText = tokens.get(i).getText();
-            if(tokenText.equals("{") || tokenText.equals("}") || tokenText.equals(";")){
+            if (tokenText.equals("{") || tokenText.equals("}") || tokenText.equals(";")) {
                 rewriter.insertAfter(i, "\n");
             }
         }
@@ -51,11 +53,16 @@ public class test {
         System.out.println(rewriter.getText());
 
         Runtime.getRuntime().exec("cmd   /K \"cd /d E:\\gcc\\bin" + // change directory to gcc bin
-                " && gcc C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\src\\output.c -o C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\output"+ //compile the output.c file
+                " && gcc C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\src\\output.c -o C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\output" + //compile the output.c file
                 "&& C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\output > C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\src\\outputOfOutput.txt" + //redirect the output of output.c to txt file
                 " && del C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\output.exe \"");  //delete execution (output.exe) file because it contains the first compilation only i.e. never updates
 
         Thread.sleep(4000); //wait 4 seconds till the output is piped to the text file
+
+    }
+
+    public static void getBranchCoverageArray() throws IOException {
+
         BufferedReader input = new BufferedReader(new FileReader("src\\outputOfOutput.txt"));
         String last = " ", line;
 
