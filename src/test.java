@@ -11,6 +11,7 @@ public class test {
     public static TokenStreamRewriter rewriter;
     public static TokenStreamRewriter htmlRewriter;
     public static CommonTokenStream tokens;
+    public static ParseTree tree;
     public static int [] branchCoverageArray;
     public static void main(String [] args) throws Exception {
         String inputFile = "input.c";
@@ -21,7 +22,7 @@ public class test {
         rewriter = new TokenStreamRewriter(tokens);
         htmlRewriter = new TokenStreamRewriter(tokens);
         dynamicAnalyzerParser parser = new dynamicAnalyzerParser(tokens);
-        ParseTree tree = parser.compilationUnit();
+        tree = parser.compilationUnit();
         ParseTreeWalker parseTreeWalker = new ParseTreeWalker();
         parseTreeWalker.walk(new DynamicAnalyzer(), tree);
         injectC();
@@ -34,7 +35,7 @@ public class test {
     }
 
 
-    static void injectC() throws IOException , InterruptedException {
+    static void injectC() throws IOException, InterruptedException {
         /* decorating injections */
         for(int i=0 ; i< tokens.size(); i++){
             rewriter.insertAfter(i, " ");
@@ -49,30 +50,38 @@ public class test {
         outFS.close();
         System.out.println(rewriter.getText());
 
-        Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd /d E:\\gcc\\bin" + // change directory to gcc bin
+        Runtime.getRuntime().exec("cmd   /K \"cd /d E:\\gcc\\bin" + // change directory to gcc bin
                 " && gcc C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\src\\output.c -o C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\output"+ //compile the output.c file
                 "&& C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\output > C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\src\\outputOfOutput.txt" + //redirect the output of output.c to txt file
                 " && del C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\output.exe \"");  //delete execution (output.exe) file because it contains the first compilation only i.e. never updates
-        Thread.sleep(4000);  //wait 4 seconds till the text is loaded into the text file
+
+        Thread.sleep(4000); //wait 4 seconds till the output is piped to the text file
         BufferedReader input = new BufferedReader(new FileReader("src\\outputOfOutput.txt"));
         String last = " ", line;
 
         while ((line = input.readLine()) != null) {
             last = line;
         }
+
+
+        System.out.println(last);
         int index = 0 , k = 0;
         branchCoverageArray = new int[last.length()/2];
         while(!last.isEmpty() && index < last.length()-1){
             if(last.charAt(index) != ' ') {
                branchCoverageArray[k] = Integer.parseInt(String.valueOf(last.charAt(index)));
+                System.out.print(branchCoverageArray[k] + " ");
                 k++;
             }
             index++;
         }
 
+
     }
 
     static void injectHtml() throws IOException {
+        //ParseTreeWalker parseTreeWalker2 = new ParseTreeWalker();
+        //parseTreeWalker2.walk(new DynamicAnalyzerHtml(), tree);
         for(int i=0 ; i< tokens.size(); i++){
             htmlRewriter.insertAfter(i, " ");
             String tokenText2 = tokens.get(i).getText();
@@ -87,7 +96,9 @@ public class test {
         outFS2.close();
         //System.out.println(htmlRewriter.getText());
 
-        Runtime.getRuntime().exec("cmd /c start cmd.exe /K \"cd C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\src && start chrome htmlOutput.html\"");
+        Runtime.getRuntime().exec("cmd  /K \"cd C:\\Users\\noraan\\IdeaProjects\\Dynamic_Analyzer\\src && start chrome htmlOutput.html\"");
+
+
     }
 }
 

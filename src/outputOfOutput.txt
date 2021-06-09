@@ -1,0 +1,5 @@
+i is smaller than 12 too
+i is smaller than 12 too
+i is smaller than 12 too
+i is greater than 15
+0 1 1 0 1 0 0 1 0 0 1 0 0 0 0 0 0 0 0 0 
