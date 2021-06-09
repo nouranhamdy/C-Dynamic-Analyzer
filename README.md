@@ -2,7 +2,7 @@
 C-Dynamic analyzer that injects test code inside functions to generate statements and branches coverage reports.
 # Idea
 Inject the source code an array of integers initialized with zeros, and each CompoundStatement, i.e. after '{', is to be injected an array element assigned 1, then outstream the buffer of tokens to output.c file. On running that output file, the array will indicate the covered branches. <br/>
-![Analyzer-Diagram](https://user-images.githubusercontent.com/48333642/121282890-871a3700-c8da-11eb-907b-79102f5df407.png)
+![Analyzer_Diagram](https://user-images.githubusercontent.com/48333642/121284301-eed18180-c8dc-11eb-8a3e-4cc00a8ea79c.png))
 # steps
 Using TokenStreamRewriter(TokenStream tokens) class to insert tokens to the parsing buffer on runtime.
 1. in test.java: <br />
