@@ -14,7 +14,7 @@ Using TokenStreamRewriter(TokenStream tokens) class to insert tokens to the pars
   2.3. inject an array element at that index. <br />
          <br/>  
 3. run the edited code and pipe the output into tex file.<br/>
-4. read the text file to check the array elements, and using the aforementioned injecting steps, inject html code into the input source code.<br/>
+4. read the text file to check the array elements and, using the aforementioned injecting steps, inject html code into the input source code.<br/>
 # Analyzed code  
 
 ![analyzedC-code](https://user-images.githubusercontent.com/48333642/121285765-322cef80-c8df-11eb-8594-b0d7c6c3a285.PNG)
