@@ -12,3 +12,5 @@ Using TokenStreamRewriter(TokenStream tokens) class to insert tokens to the pars
   2.1. declare an integer, to work as array index, that will be incremented for each enterCompoundStatement function call.  <br />
   2.2. get the index of start token in the current sub-parseTree. <br />
   2.3. inject an array element at that index. <br />
+# Analyzed code  
+![analyzedC-code](https://user-images.githubusercontent.com/48333642/121283397-4ec72880-c8db-11eb-9ec8-7acdb7383d05.PNG)
