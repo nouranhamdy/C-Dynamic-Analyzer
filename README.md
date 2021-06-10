@@ -12,7 +12,7 @@ Using TokenStreamRewriter(TokenStream tokens) class to insert tokens to the pars
   1.1. generate static tokenStreamRewriter instance  in the test class to be shared among other classes.  <br />
 	 <br />  
 2. in the class extending from the BaseListener:  <br />
-  2.1. declare an integer, to work as array index, that will be incremented for each enterCompoundStatement function call.  <br />
+  2.1. declare an integer, to work as the array index, that will be incremented for each enterCompoundStatement function call.  <br />
   2.2. get the index of start token in the current sub-parseTree. <br />
   2.3. inject an array element at that index. <br />
          <br/>  
