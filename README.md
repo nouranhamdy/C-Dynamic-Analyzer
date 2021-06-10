@@ -9,7 +9,7 @@ C-Dynamic analyzer that injects test code inside functions to generate statement
 # steps
 Using TokenStreamRewriter(TokenStream tokens) class to insert tokens to the parsing buffer on runtime.
 1. in test.java: <br />
-  1.1. generate static variable in the test class to be shared among other classes.  <br />
+  1.1. generate static tokenStreamRewriter instance  in the test class to be shared among other classes.  <br />
 	 <br />  
 2. in the class extending from the BaseListener:  <br />
   2.1. declare an integer, to work as array index, that will be incremented for each enterCompoundStatement function call.  <br />
